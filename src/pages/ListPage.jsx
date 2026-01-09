@@ -1,6 +1,55 @@
 import { useState, useEffect } from "react";
 import { fetchItems } from "../api/fetchItems";
 import { Link, useSearchParams } from "react-router-dom";
+import styled from "@emotion/styled";
+
+const ItemCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ffff;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  max-width: 300px;
+  justify-content: center;
+`;
+
+const NonPointedList = styled.ul`
+  list-style: none;
+`;
+
+const TitleSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0px;
+  text-align: left;
+`;
+
+const EngTitle = styled.h3`
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
+  font-weight: semi-bold;
+  color: #353535ff;
+`;
+
+const JpnTitle = styled.h4`
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px;
+  font-weight: normal;
+  color: #605f5fff;
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+`;
 
 const ListPage = () => {
   const [animes, setAnimes] = useState([]);
@@ -53,15 +102,29 @@ const ListPage = () => {
     return <div>Error: {error}</div>;
   }
 
+  console.log(animes[1]?.attributes.coverImage.small);
+
   return (
     <>
       <ul>
         {animes.map((anime) => (
-          <li key={anime.id}>
+          <NonPointedList key={anime.id}>
             <Link to={`/anime/${anime.id}`}>
-              {anime.attributes.titles.en || anime.attributes.titles.en_jp}
+              <ItemCard>
+                {/* Butuh diatur untuk bisa muncul/error boundaries */}
+                {/* Error: Muncul di 0 aja */}
+                <StyledImg
+                  src={anime.attributes?.coverImage?.small}
+                  alt={anime.attributes?.titles?.en}
+                  loading="lazy"
+                />
+                <TitleSection>
+                  <EngTitle>{anime.attributes.titles.en}</EngTitle>
+                  <JpnTitle>{anime.attributes.titles.ja_jp}</JpnTitle>
+                </TitleSection>
+              </ItemCard>
             </Link>
-          </li>
+          </NonPointedList>
         ))}
       </ul>
 
