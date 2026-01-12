@@ -92,15 +92,8 @@ const Poster = styled.img`
 const ListPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 0;
-  margin: 0;
-
-  max-width: 1100px;
-  margin: auto;
   padding: clamp(16px, 3vw, 32px);
-  min-height: 100vh;
 `;
 
 const RatingSection = styled.div`
