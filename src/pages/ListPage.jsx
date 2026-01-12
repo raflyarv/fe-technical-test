@@ -23,6 +23,7 @@ const ItemCard = styled.div`
   background: #ffffff;
   border-radius: 14px;
   padding: 14px;
+  box-sizing: border-box;
 `;
 
 const ListItems = styled.ul`
@@ -30,7 +31,7 @@ const ListItems = styled.ul`
   grid-template-columns: repeat(1, 1fr);
   padding: 0;
   margin: 0;
-  gap: 55px 20px;
+  gap: 32px 20px;
 
   margin-bottom: 50px;
   align-items: stretch;
@@ -83,10 +84,10 @@ const JpnTitle = styled.h4`
 
 const Poster = styled.img`
   width: 100%;
+  max-width: 100%;
+  height: auto;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 10px;
-  background: #e5e7eb;
 `;
 
 const ListPageContainer = styled.div`
@@ -94,6 +95,8 @@ const ListPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: clamp(16px, 3vw, 32px);
+  box-sizing: border-box;
+  max-width: 100%;
 `;
 
 const RatingSection = styled.div`
@@ -152,11 +155,14 @@ const SynopsisSection = styled.p`
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  word-break: break-word;
+  overflow-wrap: anywhere;
 `;
 
 const PaginationContainer = styled.div`
   display: flex;
-  justify-content: justify-between;
+  justify-content: space-between;
   align-items: center;
   gap-x: 8px;
 `;
