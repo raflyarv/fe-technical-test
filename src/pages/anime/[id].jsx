@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchDetails } from "../../api/fetchDetails";
 
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { mq } from "../../styles/breakpoint";
 
 const FALLBACK_IMAGE_URL = "https://placehold.co/300x400?text=Image+Not+Found";
@@ -131,9 +131,29 @@ const InfoItem = styled.div`
   }
 `;
 
+const BackNav = styled.button`
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 0;
+  margin-bottom: 10px;
+`;
+
+const BackIcon = styled(FontAwesomeIcon)`
+  font-size: 18px;
+`;
+
 const DetailPage = () => {
   const { id } = useParams();
-  console.log(id);
+  const navigate = useNavigate();
 
   const [anime, setAnime] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -184,6 +204,11 @@ const DetailPage = () => {
 
   return (
     <PageWrapper>
+      <BackNav onClick={() => navigate(-1)}>
+        <BackIcon icon={faArrowLeft} />
+        Back
+      </BackNav>
+
       <Header>
         <Poster
           src={attr.posterImage?.medium || FALLBACK_IMAGE_URL}
